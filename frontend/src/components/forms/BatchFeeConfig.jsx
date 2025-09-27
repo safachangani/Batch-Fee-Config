@@ -77,121 +77,122 @@ function BatchFeeConfig() {
   return (
     <div className='section'>
       <h1>Batch Fee Configuration</h1>
-      <div className='row'>
-        <p>Select Batch</p>
-        <div className='row-wrapper'>
-          <label htmlFor="">Batches</label>
-          <select name="batches" id="" onChange={handleSelectedBatch}>
-            {batchesName.map((batch) => (
-
-              <option value={batch._id} key={batch._id}>{batch.batchName}</option>
-            ))}
-          </select>
-          {batchDetails && (
-            <div className='details'>
-              <ul>
-                <li>Batch Name : <span>{batchDetails.batchName}</span></li>
-                <li>Course : <span>{batchDetails.course}</span></li>
-                <li>Medium : <span>{batchDetails.medium}</span></li>
-              </ul>
-              <ul>
-                <li>No. of Students : <span>{batchDetails.noOfStudents}</span></li>
-                <li>Classes per Month : <span>{batchDetails.noOfClassesPerMonth}</span></li>
-              </ul>
-            </div>
-          )}
-
-        </div>
-      </div>
-      <div className='row'>
-        <p>Select Fee Structure</p>
-        <div className="row-wrapper">
-          <label htmlFor="">Fee Structure</label>
-          <select name="batches" id="" onChange={handleFeeStructure}>
-            <option value="">Select a fee structure</option>
-            {feeStructures.length > 0 ?
-              feeStructures.map(fee => (
-
-                <option value={fee._id} key={fee._id}>{fee.feeStructureName}</option>
-              )
-              ) : <option disabled>no fee structure found </option>
-            }
-          </select>
-          {showfeeDetails &&
-            feeStructures.filter(feeStruct => feeStruct._id == feeId)
-              .map(feeStruct => (
-                <div className='details'>
-                  <ul key={feeStruct._id}>
-                    <li>Fee Structure Name : <span>{feeStruct.feeStructureName}</span></li>
-                    <li>No. of Students : <span>{feeStruct.minNoOfStudents} - {feeStruct.maxNoOfStudents}</span></li>
-                    <li>Classes per Month : <span>{feeStruct.TotalClassesPerMonth}</span></li>
-                  </ul>
-                  <ul>
-                    <li>Monthly Fee : <span>{feeStruct.monthlyFee}</span></li>
-                    <li>Course : <span>{feeStruct.course}</span></li>
-                    <li>Medium : <span>{feeStruct.medium}</span></li>
-                  </ul>
-                </div>
-
-              ))
-          }
-
-        </div>
-      </div>
-      {totalfeeDetails &&
-
+      <div className='section-wrapper'>
         <div className='row'>
-          <p>{`monthly Fee for ${batchDetails.batchName}`}</p>
-          <input
-            type="text"
-            value={`INR ${totalfeeDetails.totalFee - discount}`}
-            disabled
-            className='mo__fee'
-          />
-        </div>
-      }
-      {totalfeeDetails &&
-        <div className='section-col2'>
-          <label htmlFor="" className='std__config'>
-            <input type="checkbox" name="" id="" onChange={handleChecked} />
-            do you want to configure students discount?
-          </label>
-          <div className='col2-wrapper'>
-            <div className={`col2-inner-wrapper ${isChecked ? 'checked' : ''}`}>
-              <div className='col2-content'>
-                {count.map((id) => (
-                  <StudentComponent
-                    key={id}
-                    id={id}
-                    studentFee={totalfeeDetails.feePerStudent}
-                    studentDiscount={studentDiscount[id] || 0}
-                    changeDiscount={(val) => {
-                      setStudentDiscount(prev => ({ ...prev, [id]: val }))
-                    }}
-                  />
-                )
-                )}
-                <button onClick={addComponemt}>+add</button>
+          <p>Select Batch</p>
+          <div className='row-wrapper'>
+            <label htmlFor="">Batches</label>
+            <select name="batches" id="" onChange={handleSelectedBatch}>
+              {batchesName.map((batch) => (
+
+                <option value={batch._id} key={batch._id}>{batch.batchName}</option>
+              ))}
+            </select>
+            {batchDetails && (
+              <div className='details'>
+                <ul>
+                  <li>Batch Name : <span>{batchDetails.batchName}</span></li>
+                  <li>Course : <span>{batchDetails.course}</span></li>
+                  <li>Medium : <span>{batchDetails.medium}</span></li>
+                </ul>
+                <ul>
+                  <li>No. of Students : <span>{batchDetails.noOfStudents}</span></li>
+                  <li>Classes per Month : <span>{batchDetails.noOfClassesPerMonth}</span></li>
+                </ul>
               </div>
-            </div>
+            )}
+
           </div>
+        </div>
+        <div className='row'>
+          <p>Select Fee Structure</p>
+          <div className="row-wrapper">
+            <label htmlFor="">Fee Structure</label>
+            <select name="batches" id="" onChange={handleFeeStructure}>
+              <option value="">Select a fee structure</option>
+              {feeStructures.length > 0 ?
+                feeStructures.map(fee => (
+
+                  <option value={fee._id} key={fee._id}>{fee.feeStructureName}</option>
+                )
+                ) : <option disabled>no fee structure found </option>
+              }
+            </select>
+            {showfeeDetails &&
+              feeStructures.filter(feeStruct => feeStruct._id == feeId)
+                .map(feeStruct => (
+                  <div className='details'>
+                    <ul key={feeStruct._id}>
+                      <li>Fee Structure Name : <span>{feeStruct.feeStructureName}</span></li>
+                      <li>No. of Students : <span>{feeStruct.minNoOfStudents} - {feeStruct.maxNoOfStudents}</span></li>
+                      <li>Classes per Month : <span>{feeStruct.TotalClassesPerMonth}</span></li>
+                    </ul>
+                    <ul>
+                      <li>Monthly Fee : <span>{feeStruct.monthlyFee}</span></li>
+                      <li>Course : <span>{feeStruct.course}</span></li>
+                      <li>Medium : <span>{feeStruct.medium}</span></li>
+                    </ul>
+                  </div>
+
+                ))
+            }
+
+          </div>
+        </div>
+        {totalfeeDetails &&
+
           <div className='row'>
-            <p>Discount</p>
-            <input type="number" name="" id="" min={0} onChange={handleDiscount} value={discount} />
-          </div>
-          < div className='row'>
-            <p>Batch Fee</p>
+            <p>{`monthly Fee for ${batchDetails.batchName}`}</p>
             <input
               type="text"
-              value={`INR ${totalfeeDetails.totalFee - discount - totalstudentsDiscount}`}
+              value={`INR ${totalfeeDetails.totalFee - discount}`}
               disabled
               className='mo__fee'
             />
-
           </div>
-        </div>
-      }
+        }
+        {totalfeeDetails &&
+          <div className='section-col2'>
+            <label htmlFor="" className='std__config'>
+              <input type="checkbox" name="" id="" onChange={handleChecked} />
+              do you want to configure students discount?
+            </label>
+            <div className='col2-wrapper'>
+              <div className={`col2-inner-wrapper ${isChecked ? 'checked' : ''}`}>
+                <div className='col2-content'>
+                  {count.map((id) => (
+                    <StudentComponent
+                      key={id}
+                      id={id}
+                      studentFee={totalfeeDetails.feePerStudent}
+                      studentDiscount={studentDiscount[id] || 0}
+                      changeDiscount={(val) => {
+                        setStudentDiscount(prev => ({ ...prev, [id]: val }))
+                      }}
+                    />
+                  )
+                  )}
+                </div>
+                <button className='btn-add' onClick={addComponemt}>+add</button>
+              </div>
+            </div>
+            <div className='row'>
+              <p>Discount</p>
+              <input type="number" name="" id="" min={0} onChange={handleDiscount} value={discount} />
+            </div>
+            < div className='row'>
+              <p>Total Batch Fee</p>
+              <input
+                type="text"
+                value={`INR ${totalfeeDetails.totalFee - discount - totalstudentsDiscount}`}
+                disabled
+                className='batch__mo__fee'
+              />
 
+            </div>
+          </div>
+        }
+      </div>
     </div>
   )
 }

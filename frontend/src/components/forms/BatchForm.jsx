@@ -61,6 +61,7 @@ function BatchForm() {
     }).then(err => console.log(err))
   }
   function handleUpdate(batchId) {
+    setIsSubmitted(false)
     setIsUpdate(true)
     setRowId(batchId)
     const rowData = batches.find(batch => batch._id === batchId)
@@ -89,18 +90,21 @@ function BatchForm() {
           </div>
           <div>
             <label htmlFor="">Number Of Stuents</label>
-            <input type="number" name="noOfStudents" id="" required />
+            <input type="number" min={1} name="noOfStudents" id="" required />
           </div>
           <div>
             <label htmlFor="">Number Of Classes Per Month</label>
-            <input type="number" name="noOfClassesPerMonth" id="" required />
+            <input type="number" min={1} name="noOfClassesPerMonth" id="" required />
           </div>
           <div>
             <label htmlFor="">Course</label>
             <select name="course" id="" required>
               <option value="mathematics">Mathematics</option>
               <option value="physics">Physics</option>
+              <option value="chemistry">Chemistry</option>
+              <option value="biology">Biology</option>
             </select>
+
           </div>
           <div>
             <label htmlFor="">Medium</label>
@@ -117,7 +121,7 @@ function BatchForm() {
       </div>
       <div>
         <div>
-          <table>
+          {batches.length > 0 && (<table>
             <thead>
               <tr>
                 <th>Batch Name</th>
@@ -137,13 +141,13 @@ function BatchForm() {
                   <td>{batch.course}</td>
                   <td>{batch.medium}</td>
                   <td>
-                    <button onClick={() => handleUpdate(batch._id)}>Update</button>
-                    <button onClick={() => handleDelete(batch._id)}>Delete</button>
+                    <button className='btn-update' onClick={() => handleUpdate(batch._id)}>Update</button>
+                    <button className='btn-delete' onClick={() => handleDelete(batch._id)}>Delete</button>
                   </td>
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table>)}
 
 
         </div>

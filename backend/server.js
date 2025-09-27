@@ -9,18 +9,18 @@ const batchFeeRoutes = require('./routes/batchFeeRoutes')
 const PORT = 5000;
 
 app.use(express.json());
-app.use(cors({
-  origin: 'https://batch-fee-config-5.onrender.com',
-  credentials: true
-}));
+app.use(cors());
 dotenv.config();
 
 async function connectDB() {
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(
+      process.env.MONGO_URI || "mongodb://127.0.0.1:27017/batchFeeConfig",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    );
     console.log("mongodb connected");
 
   } catch (err) {

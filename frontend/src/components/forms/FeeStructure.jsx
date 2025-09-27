@@ -56,6 +56,7 @@ function FeeStructure() {
   }
 
   function handleUpdate(feeStructurId) {
+    setIsSubmitted(false)
     setIsUpdate(true)
     setRowId(feeStructurId)
     const rowData = feeStructures.find(fee => fee._id === feeStructurId)
@@ -89,7 +90,7 @@ function FeeStructure() {
           </div>
           <div>
             <label htmlFor="">Number Of Stuents(Min)</label>
-            <input type="number" name="minNoOfStudents" id="" required />
+            <input type="number" min={1} name="minNoOfStudents" id="" required />
           </div>
           <div>
             <label htmlFor="">Number Of Stuents(Max)</label>
@@ -137,42 +138,43 @@ function FeeStructure() {
       </div>
       <div>
         <div>
-          <table>
-            <thead>
-              <tr>
-                <th>Fee Structure Name</th>
-                <th>Min Students</th>
-                <th>Max Students</th>
-                <th>Region</th>
-                <th>Medium</th>
-                <th>Course</th>
-                <th>Monthly Fee</th>
-                <th>Total Classes/Month</th>
-                <th>Remarks</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {feeStructures.map((feeStructure) => (
-                <tr key={feeStructure._id}>
-                  <td>{feeStructure.feeStructureName}</td>
-                  <td>{feeStructure.minNoOfStudents}</td>
-                  <td>{feeStructure.maxNoOfStudents}</td>
-                  <td>{feeStructure.region}</td>
-                  <td>{feeStructure.medium}</td>
-                  <td>{feeStructure.course}</td>
-                  <td>{feeStructure.monthlyFee}</td>
-                  <td>{feeStructure.TotalClassesPerMonth}</td>
-                  <td>{feeStructure.remarks}</td>
-                  <td>
-                    <button className='update-btn' onClick={() => handleUpdate(feeStructure._id)}>Update</button>
-                    <button className='delete-btn' onClick={() => handleDelete(feeStructure._id)}>Delete</button>
-                  </td>
+          {feeStructures.length > 0 && (
+            <table>
+              <thead>
+                <tr>
+                  <th>Fee Structure Name</th>
+                  <th>Min Students</th>
+                  <th>Max Students</th>
+                  <th>Region</th>
+                  <th>Medium</th>
+                  <th>Course</th>
+                  <th>Monthly Fee</th>
+                  <th>Total Classes/Month</th>
+                  <th>Remarks</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-
+              </thead>
+              <tbody>
+                {feeStructures.map((feeStructure) => (
+                  <tr key={feeStructure._id}>
+                    <td>{feeStructure.feeStructureName}</td>
+                    <td>{feeStructure.minNoOfStudents}</td>
+                    <td>{feeStructure.maxNoOfStudents}</td>
+                    <td>{feeStructure.region}</td>
+                    <td>{feeStructure.medium}</td>
+                    <td>{feeStructure.course}</td>
+                    <td>{feeStructure.monthlyFee}</td>
+                    <td>{feeStructure.TotalClassesPerMonth}</td>
+                    <td>{feeStructure.remarks}</td>
+                    <td>
+                      <button className='btn-update' onClick={() => handleUpdate(feeStructure._id)}>Update</button>
+                      <button className='btn-delete' onClick={() => handleDelete(feeStructure._id)}>Delete</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </div>
