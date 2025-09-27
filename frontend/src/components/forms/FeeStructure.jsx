@@ -80,7 +80,7 @@ function FeeStructure() {
     <div>
       <div>
 
-        <form action="" onSubmit={handleSubmit}>
+        <form action="" onSubmit={handleSubmit} className={`${isSubmitted && 'collapse'}`}>
           <div className='form-title'>
             <h1>Add Fee Structure</h1>
             <button onClick={handleToggle}>{isSubmitted ? '▲' : '▼'}</button>
