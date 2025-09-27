@@ -18,7 +18,7 @@ dotenv.config();
 async function connectDB() {
   try {
     await mongoose.connect(
-      process.env.MONGO_URI || "mongodb://127.0.0.1:27017/batchFeeConfig",
+      process.env.DB_URI || "mongodb://127.0.0.1:27017/batchFeeConfig",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

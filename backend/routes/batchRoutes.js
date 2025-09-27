@@ -11,6 +11,7 @@ router.post('/batch-details', async (req, res) => {
     await newBatch.save()
     res.status(201).json(newBatch)
   } catch (err) {
+    console.log(err)
     res.status(400).json({ error: err.message })
   }
 })
