@@ -43,6 +43,7 @@ function FeeStructure() {
       }).catch(err => console.log(err.response.data.error))
     }
     e.target.reset()
+    setIsSubmitted(true)
   }
 
   function handleDelete(feeStructurId) {
